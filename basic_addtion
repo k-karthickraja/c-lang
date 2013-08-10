@@ -1,0 +1,114 @@
+//program to add two number's upto 100 digits. 
+#include<stdio.h>
+#include<stdlib.h>  //for exit(0).
+#include<string.h>  //for string length function
+#define max 100    // for digit limitations.
+main()
+{
+
+// initialization of variables  
+        char first_no[max];             // to store given input no.
+        char second_no[max];
+        int result[max+20]={0};         // to store result of operation
+        int rvrs_first_no[max]={0};
+        int rvrs_second_no[max]={0};    //to store reverse value of given number
+        int fn_length,sn_length;        // to length os given number's
+        int i=0,j=0; //for looping index 
+        int big,carry,tmp;
+
+// getting the input values.
+        printf("Enter the number 1 :\t");
+        scanf("%s",first_no);   // get input as string.
+                                //so we can get very large number also.
+
+
+        fn_length = strlen(first_no); // holds the length of first number.
+
+        // validation for first number
+        j=fn_length-1;
+        for(i=0;i<fn_length;i++)
+        {
+                //48 - 57 is the ascii value for 0-9 numbers.
+                //we get input as character so we convert it as number by subtract 48 with all.
+               
+                if(first_no[i]>=48&&first_no[i]<=57)
+                {
+                        first_no[i]=first_no[i]-48;      //first number have numeric value.
+                        rvrs_first_no[j]=first_no[i]; // stored in reverse format
+                        j--;
+                }
+                else
+                {
+                        // for non numerical values.
+                        printf("Entered number is invalid\n");
+                        exit(0);  //terminate the execution.                    
+                }
+        }
+
+        // for second number
+        printf("Enter the number 2 :\t");
+        scanf("%s",second_no);
+
+        sn_length = strlen(second_no);
+        j=sn_length-1;
+        for(i=0;i<sn_length;i++)
+        {
+                if(second_no[i]>=48&&second_no[i]<=57)
+                {
+
+                        second_no[i]=second_no[i]-48;
+                        rvrs_second_no[j]=second_no[i];//stored in reverse format.
+                        j--;
+                }
+                else
+                {
+                        printf("Entered  number is invalid :\n");
+                        exit(0);
+                }
+        }
+
+        // to find out which is bigger. 
+        if(fn_length>sn_length)
+        {
+                big=fn_length; // hold's the biggest number's length
+        }
+        else
+        {
+                big=sn_length;
+        }
+
+
+        for(i=0;i<big;i++)
+        {
+                int tmp;
+                tmp=rvrs_first_no[i]+rvrs_second_no[i];
+                if(carry==1)
+                {
+                        tmp++;
+                        carry=0;
+                }
+                if(tmp>9)
+                {
+                        tmp=tmp-10;
+                        carry=1;
+                }
+                result[i]=tmp;
+        }
+        if(carry!=0)
+        {
+                result[big]=1;
+                big++;
+        }
+
+
+        // printing result 
+        printf("\n   Addition of\n   two number's is :\t");
+        for(i=big-1;i>=0;i--)
+        {
+                printf("%d",result[i]);
+        }
+        printf("\n");
+}//main;
+
+ 
+                                                                                       29,1-8        38%
